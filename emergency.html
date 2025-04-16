@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Emergency & Well-being Insights</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      padding: 20px;
+      color: #333;
+    }
+    .card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      margin: auto;
+    }
+    .title {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+    .section {
+      margin: 15px 0;
+    }
+    .risk-bar {
+      background: #ddd;
+      border-radius: 20px;
+      overflow: hidden;
+      height: 20px;
+      margin-top: 5px;
+    }
+    .risk-fill {
+      height: 100%;
+      background: orange;
+      width: 60%; /* risk level 60% */
+      transition: width 0.5s;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin-top: 10px;
+      background: #d32f2f;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .btn:active {
+      background: #b71c1c;
+    }
+    .contact {
+      background: #fef2f2;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <div class="title">🚨 Emergency & Well-being Insights</div>
+
+  <div class="section">
+    🧠 <strong>Smart Emergency Pre-Detection Alerts</strong><br>
+    Alert (08:45 AM): Elevated heart rate & irregular stress patterns detected over the last 48 hours.<br>
+    <strong>Risk Level:</strong> HIGH<br>
+    <strong>Action:</strong> Emergency contacts will be notified. Avoid intense activity & seek medical advice.
+  </div>
+
+  <div class="section">
+    🎭 <strong>Emotional Tone & Energy Mapping</strong><br>
+    Based on voice tone, heart rate, and sleep irregularities.
+  </div>
+
+  <div class="section">
+    📊 <strong>Real-Time Risk Indicator</strong><br>
+    Status: <strong>Moderate</strong><br>
+    <div class="risk-bar">
+      <div class="risk-fill" id="riskFill"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    ⏰ <strong>Last Synced:</strong> <span id="syncTime">--</span><br>
+    📍 <strong>Location:</strong> Accessing...
+  </div>
+
+  <div class="section contact">
+    📍 <strong>Emergency Contact:</strong><br>
+    Name: Dr. Aarti Mehra<br>
+    Phone: <a href="tel:+911234567890">+91 12345 67890</a><br>
+    <button class="btn" onclick="notifyContact()">Notify Now</button>
+  </div>
+
+  <div class="section">
+    🔴 <strong>Need Immediate Help?</strong><br>
+    <button class="btn" onclick="triggerSOS()">Trigger SOS Alert</button>
+  </div>
+</div>
+
+<script>
+  function notifyContact() {
+    alert("Emergency contact notified: Dr. Aarti Mehra");
+  }
+
+  function triggerSOS() {
+    alert("🚨 SOS Alert Triggered! Authorities and contacts have been notified.");
+  }
+
+  // Set sync time
+  document.getElementById("syncTime").textContent = new Date().toLocaleString();
+
+  // Simulate location
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((pos) => {
+      const { latitude, longitude } = pos.coords;
+      document.querySelector('strong + span').textContent = Lat: ${latitude.toFixed(2)}, Lng: ${longitude.toFixed(2)};
+    }, () => {
+      document.querySelector('strong + span').textContent = "Location access denied.";
+    });
+  } else {
+    document.querySelector('strong + span').textContent = "Geolocation not supported.";
+  }
+</script>
+
+</body>
+</html>

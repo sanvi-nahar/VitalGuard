@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Health Monitoring Preferences</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f9f9;
+      padding: 2rem;
+    }
+
+    .preferences-card {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .preferences-card h2 {
+      color: teal;
+      margin-bottom: 0.5rem;
+    }
+
+    .preferences-card button {
+      padding: 0.6rem 1.2rem;
+      background: teal;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+
+    .preferences-options {
+      background-color: #eef7f7;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+
+    .checkbox-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0.5rem 0;
+    }
+
+    .preferences-output {
+      margin-top: 1.5rem;
+      background: #f0fdfc;
+      padding: 1rem;
+      border: 1px solid #cce;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="preferences-card">
+    <h2>🩺 Health Monitoring Preferences</h2>
+    <p>Select the health vitals and alerts you'd like to monitor continuously.</p>
+
+    <div class="preferences-options">
+      <div class="checkbox-row">
+        <label for="heartRate">Heart Rate</label>
+        <input type="checkbox" id="heartRate">
+      </div>
+      <div class="checkbox-row">
+        <label for="bloodPressure">Blood Pressure</label>
+        <input type="checkbox" id="bloodPressure">
+      </div>
+      <div class="checkbox-row">
+        <label for="oxygenSaturation">Oxygen Saturation</label>
+        <input type="checkbox" id="oxygenSaturation">
+      </div>
+
+      <button onclick="savePreferences()">Save Preferences</button>
+    </div>
+
+    <div class="preferences-output">
+      <strong>Currently Monitoring:</strong>
+      <ul id="monitoringList">
+        <li>None</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    function savePreferences() {
+      const preferences = [];
+
+      if (document.getElementById("heartRate").checked) {
+        preferences.push("Heart Rate");
+      }
+      if (document.getElementById("bloodPressure").checked) {
+        preferences.push("Blood Pressure");
+      }
+      if (document.getElementById("oxygenSaturation").checked) {
+        preferences.push("Oxygen Saturation");
+      }
+
+      const list = document.getElementById("monitoringList");
+      list.innerHTML = ""; // Clear existing
+
+      if (preferences.length === 0) {
+        list.innerHTML = "<li>None</li>";
+      } else {
+        preferences.forEach(item => {
+          const li = document.createElement("li");
+          li.textContent = item;
+          list.appendChild(li);
+        });
+      }
+
+      alert("Preferences saved!");
+    }
+  </script>
+
+</body>
+</html>

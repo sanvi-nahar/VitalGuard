@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Profile</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f9f9;
+      padding: 2rem;
+    }
+
+    .profile-card {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 500px;
+      margin: auto;
+    }
+
+    .profile-card h2 {
+      color: teal;
+      margin-bottom: 0.5rem;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin: 0.5rem 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 0.6rem 1.2rem;
+      background: teal;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 0.5rem 0.2rem 1rem 0;
+    }
+
+    .field-display {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #eef7f7;
+      border-radius: 6px;
+    }
+
+    .label {
+      font-weight: bold;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="profile-card">
+    <h2>👤 My Profile</h2>
+    <p>Update your name, contact details, and medical profile.</p>
+
+    <input type="text" id="fullName" placeholder="Full Name">
+    <input type="email" id="email" placeholder="Email">
+    <textarea id="medicalInfo" rows="3" placeholder="Medical Info"></textarea>
+
+    <button onclick="saveProfile()">Save Profile</button>
+    <button onclick="resetInputs()">Reset</button>
+
+    <div class="field-display">
+      <p><span class="label">Name:</span> <span id="displayName">John Doe</span></p>
+      <p><span class="label">Email:</span> <span id="displayEmail">john@example.com</span></p>
+      <p><span class="label">Medical Info:</span> <span id="displayMedical">No known allergies</span></p>
+    </div>
+  </div>
+
+  <script>
+    // Fill input fields from display fields when page loads
+    window.onload = () => {
+      resetInputs();
+    };
+
+    function saveProfile() {
+      const name = document.getElementById("fullName").value;
+      const email = document.getElementById("email").value;
+      const medical = document.getElementById("medicalInfo").value;
+
+      document.getElementById("displayName").textContent = name;
+      document.getElementById("displayEmail").textContent = email;
+      document.getElementById("displayMedical").textContent = medical;
+
+      alert("Profile saved successfully!");
+    }
+
+    function resetInputs() {
+      const displayName = document.getElementById("displayName").textContent;
+      const displayEmail = document.getElementById("displayEmail").textContent;
+      const displayMedical = document.getElementById("displayMedical").textContent;
+
+      document.getElementById("fullName").value = displayName;
+      document.getElementById("email").value = displayEmail;
+      document.getElementById("medicalInfo").value = displayMedical;
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Emergency Response Settings</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6fbfb;
+      padding: 2rem;
+    }
+
+    .card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h2 {
+      color: darkred;
+      display: flex;
+      align-items: center;
+    }
+
+    h2::before {
+      content: "🚨";
+      margin-right: 0.5rem;
+    }
+
+    button {
+      padding: 0.6rem 1.2rem;
+      background: teal;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+
+    .settings-box {
+      background-color: #eef7f7;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+
+    input[type="text"], input[type="tel"] {
+      width: 100%;
+      padding: 0.6rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 1rem 0 0.5rem;
+    }
+
+    .output {
+      margin-top: 1.5rem;
+      background: #fff6f6;
+      padding: 1rem;
+      border: 1px solid #f3dcdc;
+      border-radius: 6px;
+    }
+
+    .label {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h2>Emergency Response Settings</h2>
+    <p>Manage emergency contacts and configure auto-alerts in critical scenarios.</p>
+
+    <button onclick="document.getElementById('emergencySettings').scrollIntoView()">Set Emergency Options</button>
+
+    <div class="settings-box" id="emergencySettings">
+      <input type="text" id="contactName" placeholder="Emergency Contact Name" />
+      <input type="tel" id="contactNumber" placeholder="Phone Number" />
+
+      <div class="row">
+        <label for="autoAlert">Enable Auto-Alert</label>
+        <input type="checkbox" id="autoAlert" />
+      </div>
+
+      <button onclick="saveEmergencySettings()">Save Emergency Settings</button>
+    </div>
+
+    <div class="output" id="savedSettings">
+      <p><span class="label">Contact Name:</span> Not set</p>
+      <p><span class="label">Phone Number:</span> Not set</p>
+      <p><span class="label">Auto-Alert:</span> Disabled</p>
+    </div>
+  </div>
+
+  <script>
+    function saveEmergencySettings() {
+      const name = document.getElementById("contactName").value;
+      const number = document.getElementById("contactNumber").value;
+      const alert = document.getElementById("autoAlert").checked;
+
+      const output = document.getElementById("savedSettings");
+      output.innerHTML = `
+        <p><span class="label">Contact Name:</span> ${name || 'Not set'}</p>
+        <p><span class="label">Phone Number:</span> ${number || 'Not set'}</p>
+        <p><span class="label">Auto-Alert:</span> ${alert ? 'Enabled' : 'Disabled'}</p>
+      `;
+
+      alert("Emergency settings saved!");
+    }
+  </script>
+
+</body>
+</html>
