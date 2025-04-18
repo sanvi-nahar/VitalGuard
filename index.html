@@ -388,6 +388,7 @@ margin-left: 30px;
 }
 
 .step {
+  flex-direction: row;
   background: white;
   padding: 20px;
   border-radius: 12px;
@@ -413,16 +414,19 @@ margin-left: 30px;
   max-width: 1200px;
   margin: auto;
   padding: 20px;
+  background-color: var(--primary);
+  margin-bottom: 50px;
 }
 
 .footer-main {
+  background-color: --;
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
   border-top: 1px solid #ccc;
   padding: 40px 0;
   margin-top: 40px;
-  background-color: #f8f9fa;
+  color: var(--);
 }
 
 .footer-col {
@@ -442,7 +446,7 @@ margin-left: 30px;
 }
 
 .footer-text-muted {
-  color: #6c757d;
+  color: var(--card-bg)
 }
 
 .footer-heading {
@@ -462,13 +466,65 @@ margin-left: 30px;
 
 .footer-link {
   text-decoration: none;
-  color: #6c757d;
+  color: var(--card-bg);
 }
 
 .footer-link:hover {
   color: #000;
   text-decoration: underline;
 }
+.how-it-works {
+      padding: 50px 20px;
+      background-color: #f8fafc;
+      text-align: center;
+    }
+
+    .how-it-works h2 {
+      font-size: 2rem;
+      margin-bottom: 40px;
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .step {
+      flex-direction: row;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .step-number {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #3b82f6;
+    }
+
+    .step img {
+      width: 100%;
+      height: auto;
+      margin-top: 20px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* Placeholder target sections */
+    section.target {
+      height: 300px;
+      padding: 50px;
+      margin-top: 50px;
+      background-color: #e5e7eb;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
     
   </style>
 </head>
@@ -520,7 +576,6 @@ margin-left: 30px;
    </nav>
 
 
-   <!-- howitsworks -->
    <section id="howItWorks" class="how-it-works">
     <h2>Protect Your Health in 3 Smart Steps</h2>
     <div class="steps">
@@ -528,22 +583,25 @@ margin-left: 30px;
         <p class="step-number">1</p>
         <h3>Monitor Your Vitals</h3>
         <p>Track heart rate, oxygen, temperature & more with real-time AI monitoring from multiple sources.</p>
-        <img src="images/monitor-vitals.png" alt="Vital monitoring interface showing heart rate and other vitals">
+        <img src="./monitorvitals.png" alt="Vital monitoring interface" id="vitalsImg">
       </div>
       <div class="step">
         <p class="step-number">2</p>
         <h3>Detect Anomalies Early</h3>
         <p>Our multimodal AI analyzes movement, voice, and medical history to detect early signs of health risks.</p>
-        <img src="images/anomaly-detection.png" alt="AI detecting anomaly alert on a health dashboard">
+        <img src="./anomaly.png" alt="AI detecting anomaly alert" id="anomaliesImg">
       </div>
       <div class="step">
         <p class="step-number">3</p>
         <h3>Get Help Instantly</h3>
         <p>Smart alerts are sent with multichannel confirmation. Get first-aid instructions or auto-alert emergency contacts.</p>
-        <img src="images/emergency-response.png" alt="Emergency notification being sent with confirmation options">
+        <img src="images/emergency-response.png" alt="Emergency notification" id="helpImg">
       </div>
     </div>
   </section>
+
+  
+
   
   <div class="footer-container">
     <footer class="footer-main">
@@ -553,7 +611,6 @@ margin-left: 30px;
             <use xlink:href="#bootstrap"></use>
           </svg>
         </a>
-        <p class="footer-text-muted">© 2025 Footer</p>
       </div>
   
       <div class="footer-col"></div>
@@ -593,12 +650,7 @@ margin-left: 30px;
     </footer>
   </div>
   
-  <!-- Optional: Bootstrap icon symbol -->
-  <svg style="display: none;">
-    <symbol id="bootstrap" viewBox="0 0 16 16" fill="currentColor">
-      <path d="M5.062 12V4H8a3.5 3.5 0 0 1 0 7H5.062zM6.5 5.5v5h1.5a2 2 0 0 0 0-4H6.5z"/>
-    </symbol>
-  </svg>
+  
 
   
   <script>
@@ -619,9 +671,10 @@ margin-left: 30px;
       step.style.transition = 'all 0.6s ease';
       observer.observe(step);
     });
+   
   </script>
   
   
-  </script>
+
 </body>
 </html>
