@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Advanced Privacy Settings</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4f6;
+      padding: 2rem;
+    }
+
+    .setting-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      background: #007d8b;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+
+    .modal, .overlay {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+    }
+
+    .overlay {
+      background: rgba(0, 0, 0, 0.3);
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+    }
+
+    .modal {
+      top: 15%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .modal h4 {
+      margin-top: 0;
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .toggle-switch {
+      position: relative;
+      width: 45px;
+      height: 24px;
+    }
+
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0;
+      right: 0; bottom: 0;
+      background-color: #ccc;
+      transition: 0.3s;
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.3s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: #007d8b;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(21px);
+    }
+  </style>
+</head>
+<body>
+
+<div class="setting-card">
+  <h3>🔐 Privacy and Data Management</h3>
+  <p>Manage how your data is stored, protected, and shared.</p>
+  <button class="btn" onclick="openPrivacyModal()">Manage Data</button>
+</div>
+
+<!-- Modal -->
+<div class="overlay" onclick="closePrivacyModal()"></div>
+<div class="modal" id="privacyModal">
+  <h4>Advanced Privacy Settings</h4>
+
+  <div class="toggle-row">
+    <span>Store My Health Data</span>
+    <label class="toggle-switch">
+      <input type="checkbox" id="storeData">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="toggle-row">
+    <span>Share Data with Providers</span>
+    <label class="toggle-switch">
+      <input type="checkbox" id="shareData">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="toggle-row">
+    <span>Enable Data Encryption</span>
+    <label class="toggle-switch">
+      <input type="checkbox" id="encryptData">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="toggle-row">
+    <span>Allow Activity Logging</span>
+    <label class="toggle-switch">
+      <input type="checkbox" id="logData">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="toggle-row">
+    <span>Two-Factor Authentication</span>
+    <label class="toggle-switch">
+      <input type="checkbox" id="twoFactor">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="toggle-row">
+    <span>Session Timeout (5 mins)</span>
+    <label class="toggle-switch">
+      <input type="checkbox" id="sessionTimeout">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <button class="btn" onclick="savePrivacySettings()">Save Settings</button>
+</div>
+
+<script>
+  const settings = [
+    "storeData",
+    "shareData",
+    "encryptData",
+    "logData",
+    "twoFactor",
+    "sessionTimeout"
+  ];
+
+  function openPrivacyModal() {
+    document.getElementById("privacyModal").style.display = "block";
+    document.querySelector(".overlay").style.display = "block";
+
+    settings.forEach(key => {
+      document.getElementById(key).checked = localStorage.getItem(key) === "true";
+    });
+  }
+
+  function closePrivacyModal() {
+    document.getElementById("privacyModal").style.display = "none";
+    document.querySelector(".overlay").style.display = "none";
+  }
+
+  function savePrivacySettings() {
+    settings.forEach(key => {
+      localStorage.setItem(key, document.getElementById(key).checked);
+    });
+    closePrivacyModal();
+    alert("Privacy settings saved successfully!");
+  }
+
+  window.onload = () => {
+    console.log("Loaded privacy config:", settings.reduce((acc, key) => {
+      acc[key] = localStorage.getItem(key) === "true";
+      return acc;
+    }, {}));
+  }
+</script>
+
+</body>
+</html>
