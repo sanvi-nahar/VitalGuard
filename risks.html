@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VitalGuard - Health AI</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      background: #f0f4f8;
+    }
+    header {
+      background: #ffffff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav a {
+      margin-left: 1rem;
+      text-decoration: none;
+      color: #00796b;
+      font-weight: bold;
+    }
+    .hero, .features {
+      max-width: 960px;
+      margin: 2rem auto;
+      padding: 1rem;
+      text-align: center;
+    }
+    .hero h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .features {
+      text-align: left;
+    }
+    .feature {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .btn {
+      background-color: #00796b;
+      color: white;
+      padding: 0.75rem 1.25rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #00796b;
+      color: #00796b;
+    }
+
+    .risk {
+      text-underline-offset: none;
+      height: 100px;
+      width: 50px;
+      background-color: #00796b;
+    }
+
+
+  </style>
+</head>
+<body>
+  <header>
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <span style="color: #00796b; font-weight: bold; font-size: 1.5rem;">❤️ VitalGuard</span>
+    </div>
+    <nav>
+      <a href="#reduce-risks">Reduce Risks</a>
+      <a href="#chat">Chat with AI</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Welcome to VitalGuard</h2>
+    <p>Your AI-powered health monitoring platform for proactive care.</p>
+    <a id="risk" href="riskssButton.html">View Health Risks Analysis</a>
+  </section>
+
+  <section class="features">
+    <h2>Your Personal Health Guardian</h2>
+    <p>VitalGuard uses AI-powered analytics to monitor your health in real-time, predict potential risks, and provide personalized recommendations.</p>
+
+    <div class="feature">
+      <div>📈</div>
+      <div>
+        <strong>Real-time Monitoring</strong>
+        <p>Continuous health tracking through smartwatch integration.</p>
+      </div>
+    </div>
+    <div class="feature">
+      <div>🛡️</div>
+      <div>
+        <strong>Risk Prevention</strong>
+        <p>Early detection and prevention of health risks.</p>
+      </div>
+    </div>
+    <div class="feature">
+      <div>🧠</div>
+      <div>
+        <strong>AI-Powered Insights</strong>
+        <p>Smart analysis for personalized health recommendations.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 2rem;">
+      <a id="risk" href="riskssButton.html">View Health Risks Analysis</a>
+      <button class="btn btn-outline" onclick="alert('AI Chat coming soon...')">Chat with AI</button>
+    </div>
+  </section>
+
+  <section id="reduce-risks" class="hero">
+    <h2>Top 5 Health Risks</h2>
+    <p>This section will highlight the most common health issues, their causes, and prevention strategies following the 80/20 principle.</p>
+    <!-- Risk cards would go here -->
+  </section>
+
+  <script>
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
