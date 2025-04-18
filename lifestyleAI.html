@@ -13,23 +13,26 @@
     }
 
     body {
-      background: linear-gradient(-45deg, #007C91, #38B6FF, #A3E635, #FAFAFA);
-      background-size: 400% 400%;
-      animation: moveBg 12s ease infinite;
-      font-family: 'Poppins', sans-serif;
-      color: #2C2C2C;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px 20px;
-    }
+  background: linear-gradient(135deg, #f5faff, #e0f7f4, #f8fdf2);
+  background-size: 300% 300%;
+  animation: subtleBgMove 25s ease-in-out infinite;
+  font-family: 'Poppins', sans-serif;
+  color: #1C1C1C;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 30px;
+  min-height: 100vh;
+  margin: 0;
+  line-height: 1.6;
+  transition: all 0.3s ease-in-out;
+}
 
-    @keyframes moveBg {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
+@keyframes subtleBgMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
     .modern-heading {
       font-size: 2.4rem;
       font-weight: 600;
@@ -202,8 +205,11 @@
   </style>
 </head>
 <body>
-
-  <h1 class="modern-heading">Welcome to Your Daily Space, Diya!</h1>
+  <header class="modern-heading">
+    <h1 class="modern-heading">Welcome to Your Daily Space, Diya!</h1>
+  <p>Curated with AI.</p>
+  </header>
+  
 
   <div class="card">
     <div class="greeting" id="greeting">Hello!</div>
