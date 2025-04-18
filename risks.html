@@ -52,17 +52,22 @@
       font-size: 1rem;
       margin-top: 1rem;
     }
-    .btn-outline {
+      .btn-outline {
+      height: 2.6rem;
+      width: 14rem;
       background: transparent;
       border: 2px solid #00796b;
       color: #00796b;
     }
 
     .risk {
-      text-underline-offset: none;
-      height: 100px;
-      width: 50px;
+      border-radius: 5px;
+      height: 3rem;
+      width: 5rem;
       background-color: #00796b;
+      color: white;
+      padding: 0.7rem;
+      text-decoration: none;
     }
 
 
@@ -82,7 +87,7 @@
   <section class="hero">
     <h2>Welcome to VitalGuard</h2>
     <p>Your AI-powered health monitoring platform for proactive care.</p>
-    <a id="risk" href="riskButton.html">View Health Risks Analysis</a>
+    <a class="risk" href="riskButton.html">View Health Risks Analysis</a>
   </section>
 
   <section class="features">
@@ -112,7 +117,7 @@
     </div>
 
     <div style="margin-top: 2rem;">
-      <a id="risk" href="riskButton.html">View Health Risks Analysis</a>
+      <a class="risk" href="riskButton.html">View Health Risks Analysis</a>
       <button class="btn btn-outline" onclick="alert('AI Chat coming soon...')">Chat with AI</button>
     </div>
   </section>
