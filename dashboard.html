@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    .container {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .greeting h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 0.2rem;
+    }
+
+    .greeting p {
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    .dashboard-controls {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+
+    .dashboard-controls input {
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .dashboard-controls button {
+      background-color: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      padding: 1.5rem;
+      border: 2px solid #ccc;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      border-color: var(--primary);
+    }
+
+    .card h2 {
+      font-size: 1.25rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .card ul {
+      list-style: none;
+      padding: 0;
+      line-height: 1.8;
+    }
+
+    .card li span {
+      font-weight: 600;
+    }
+
+    .low {
+      color: var(--accent);
+    }
+
+    .checkup-card {
+      background-color: var(--card-bg);
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      margin-bottom: 1.5rem;
+    }
+
+    .checkup-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .checkup-header h3 {
+      font-size: 1.25rem;
+      color: var(--primary);
+    }
+
+    .checkup-details p {
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    .view-details-btn {
+      background-color: var(--secondary);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+
+    .view-details-btn:hover {
+      background-color: var(--primary);
+    }
+
+</style>
+</head>
+<body>
+     <!-- Main content -->
+  <div class="container">
+    <!-- Greeting Section -->
+    <section class="greeting">
+      <h1 id="greeting">Loading greeting...</h1>
+      <p>Here's your health snapshot for today 🩺</p>
+    </section>
+
+    <!-- Dashboard Controls -->
+    <section class="dashboard-controls">
+      <input type="date" id="date-picker" />
+      <button id="refresh-btn" title="Refresh Data"><i class="bi bi-arrow-clockwise"></i></button>
+    </section>
+
+    <!-- Dashboard Information Cards -->
+    <section class="dashboard-grid">
+      <div class="card vitals">
+        <h2>Vitals</h2>
+        <ul>
+          <li>❤️ Heart Rate: <span id="heart-rate">-- bpm</span></li>
+          <li>💨 Respiration: <span id="respiration">-- breaths/min</span></li>
+          <li>🩸 Blood Pressure: <span id="blood-pressure">--/-- mmHg</span></li>
+          <li>🌡️ Body Temp: <span id="temperature">-- °F</span></li>
+          <li>🧠 Stress Level: <span id="stress-level" class="low">--</span></li>
+        </ul>
+      </div>
+      <div class="card activity">
+        <h2>Activity</h2>
+        <ul>
+          <li>👟 Steps: <span id="steps">--</span></li>
+          <li>🛌 Sleep: <span id="sleep">-- hrs</span></li>
+          <li>🔥 Calories Burned: <span id="calories">-- kcal</span></li>
+        </ul>
+      </div>
+      <div class="card lifestyle">
+        <h2>Plan Your Lifestyle</h2>
+        <ul>
+          <li>🥗 Meal: <span id="meal-time">--</span></li>
+          <li>💧 Hydration Reminder: <span id="hydration">--</span></li>
+          <li>🧘 Stretch Break: <span id="stretch-break">--</span></li>
+        </ul>
+      </div>
+
+      <div class="card insights">
+        <h2>Insights</h2>
+        <ul id="insights-list">
+          <li>Loading insights...</li>
+        </ul>
+      </div>
+      <div class="card medical-history">
+        <h2>Medical History</h2>
+        <ul>
+          <li>💊 Last Medication: <span id="last-medication">--</span></li>
+          <li>🩺 Last Doctor Visit: <span id="last-visit">--</span></li>
+        </ul>
+      </div>
+      <div class="card upcoming-checkups">
+        <h2>Upcoming Checkups</h2>
+        <div class="checkup-card">
+          <div class="checkup-header">
+            <h3>18 April</h3>
+            <p>📍 Location: Apollo Clinic, Indore</p>
+          </div>
+          <div class="checkup-details">
+            <p><strong>Doctor:</strong> Dr. Sharma</p>
+            <p><strong>Time:</strong> 10:30 AM</p>
+            <a href="checkup-details-page.html" class="view-details-btn">View More</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const username = localStorage.getItem("username") || "User";
+    const greetingEl = document.getElementById("greeting");
+    const hour = new Date().getHours();
+    let greeting = "Hello";
+  
+    if (hour >= 5 && hour < 12) greeting = "Good Morning";
+    else if (hour >= 12 && hour < 17) greeting = "Good Afternoon";
+    else if (hour >= 17 && hour < 21) greeting = "Good Evening";
+  
+    greetingEl.textContent = `${greeting}, ${username}!`;
+  
+    const data = JSON.parse(localStorage.getItem("vitalguard_data")) || {
+      vitals: {
+        heartRate: "72 bpm",
+        respiration: "16 breaths/min",
+        bloodPressure: "120/80 mmHg",
+        temperature: "98.6°F",
+        stressLevel: "Low"
+      },
+      activity: {
+        steps: "4320",
+        sleep: "6.5 hrs",
+        calories: "210 kcal"
+      },
+      lifestyle: {
+        meal: "12:30 PM",
+        hydration: "In 20 min",
+        stretch: "3:00 PM"
+      },
+      insights: [
+        "Heart rate improved by 5%",
+        "You moved more than yesterday!"
+      ],
+      history: {
+        medication: "10 April",
+        visit: "22 March"
+      },
+      checkups: {
+        nextAppointment: "18 April",
+        location: "Apollo Clinic, Indore"
+      }
+    };
+  
+    document.getElementById("heart-rate").textContent = data.vitals.heartRate;
+    document.getElementById("respiration").textContent = data.vitals.respiration;
+    document.getElementById("blood-pressure").textContent = data.vitals.bloodPressure;
+    document.getElementById("temperature").textContent = data.vitals.temperature;
+    document.getElementById("stress-level").textContent = data.vitals.stressLevel;
+  
+    document.getElementById("steps").textContent = data.activity.steps;
+    document.getElementById("sleep").textContent = data.activity.sleep;
+    document.getElementById("calories").textContent = data.activity.calories;
+  
+    document.getElementById("meal-time").textContent = data.lifestyle.meal;
+    document.getElementById("hydration").textContent = data.lifestyle.hydration;
+    document.getElementById("stretch-break").textContent = data.lifestyle.stretch;
+  
+    const insightsList = document.getElementById("insights-list");
+    insightsList.innerHTML = "";
+    data.insights.forEach(insight => {
+      const li = document.createElement("li");
+      li.textContent = insight;
+      insightsList.appendChild(li);
+    });
+  
+    document.getElementById("last-medication").textContent = data.history.medication;
+    document.getElementById("last-visit").textContent = data.history.visit;
+  
+    document.getElementById("next-appointment").textContent = data.checkups.nextAppointment;
+    document.getElementById("appointment-location").textContent = data.checkups.location;
+  
+    document.getElementById("sos-button").addEventListener("click", () => {
+      alert("SOS Activated! Emergency services have been notified.");
+      document.getElementById("sos-button").classList.add("active");
+    });
+  
+    // Date Picker Event
+    document.getElementById("date-picker").addEventListener("change", (e) => {
+      const selectedDate = e.target.value;
+      console.log("Selected date:", selectedDate);
+      // Future integration: Fetch backend data based on selected date
+    });
+  
+    // Refresh Button Event
+    document.getElementById("refresh-btn").addEventListener("click", () => {
+      console.log("Refreshing data...");
+      // Future integration: Refresh data from backend
+    });
+  });
+  function toggleCheckups() {
+    var moreCheckups = document.getElementById('more-checkups');
+    if (moreCheckups.style.display === 'none') {
+      moreCheckups.style.display = 'block';
+    } else {
+      moreCheckups.style.display = 'none';
+    }
+  }  
+  </script>
+</body>
+</html>
