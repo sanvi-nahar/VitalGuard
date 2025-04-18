@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <!-- Insights Section -->
+  <section id="insights" style="margin: 2rem;">
+    <h2>Health Insights</h2>
+
+    <!-- Line Chart -->
+    <div style="max-width: 600px;">
+      <canvas id="heartRateChart"></canvas>
+    </div>
+
+    <!-- Bar Chart -->
+    <div style="max-width: 600px; margin-top: 2rem;">
+      <canvas id="sleepBarChart"></canvas>
+    </div>
+
+    <!-- Pie Chart -->
+    <div style="max-width: 400px; margin-top: 2rem;">
+      <canvas id="activityPieChart"></canvas>
+    </div>
+
+    <!-- Summary -->
+    <div class="summary-card" style="margin-top: 2rem;">
+      <h3>Weekly Summary</h3>
+      <p>Average Heart Rate: <span id="avgHeartRate">75 bpm</span></p>
+      <p>Average Sleep: <span id="avgSleep">6.2 hrs</span></p>
+      <p>Stress Trend: <span id="stressTrend">Stable</span></p>
+    </div>
+  </section>
+
+  <!-- Chart.js Script -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    const ctx = document.getElementById('heartRateChart').getContext('2d');
+    const heartRateChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [{
+          label: 'Heart Rate (bpm)',
+          data: [74, 76, 72, 78, 75, 73, 74],
+          borderColor: 'blue',
+          backgroundColor: 'lightblue',
+          fill: false,
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: false
+          }
+        }
+      }
+    });
+
+    const sleepCtx = document.getElementById('sleepBarChart').getContext('2d');
+    const sleepBarChart = new Chart(sleepCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [{
+          label: 'Sleep (hrs)',
+          data: [6.5, 7, 5.8, 6.2, 7.5, 8, 6.9],
+          backgroundColor: 'purple'
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    const pieCtx = document.getElementById('activityPieChart').getContext('2d');
+    const activityPieChart = new Chart(pieCtx, {
+      type: 'pie',
+      data: {
+        labels: ['Walking', 'Running', 'Resting'],
+        datasets: [{
+          label: 'Daily Activity',
+          data: [50, 20, 30],
+          backgroundColor: ['#4CAF50', '#FF9800', '#F44336']
+        }]
+      },
+      options: {
+        responsive: true
+      }
+    });
+  </script>
+</body>
+</html>
