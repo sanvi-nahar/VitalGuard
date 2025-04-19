@@ -6,84 +6,113 @@
   <title>VitalGuard - Health AI</title>
   <style>
     body {
-      font-family: sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       background: #f0f4f8;
+      color: #333;
     }
+
     header {
       background: #ffffff;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      padding: 1rem 2rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 1.5rem 2rem;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
     }
-    nav a {
-      margin-left: 1rem;
-      text-decoration: none;
+
+    header h1 {
+      font-size: 2.2rem;
       color: #00796b;
-      font-weight: bold;
+      margin: 0;
     }
+
     .hero, .features {
       max-width: 960px;
-      margin: 2rem auto;
+      margin: 2.5rem auto;
       padding: 1rem;
       text-align: center;
     }
+
     .hero h2 {
-      font-size: 2rem;
+      font-size: 2.5rem;
+      color: #004d40;
       margin-bottom: 1rem;
     }
+
     .features {
       text-align: left;
     }
+
     .feature {
       display: flex;
       gap: 1rem;
       margin-bottom: 1.5rem;
+      align-items: center;
     }
+
+    .btn,
+    .btn-outline,
+    .risk {
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-block;
+      text-align: center;
+      margin: 0.5rem;
+    }
+
     .btn {
       background-color: #00796b;
       color: white;
-      padding: 0.75rem 1.25rem;
       border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 1rem;
-      margin-top: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 121, 107, 0.2);
     }
+
+    .btn:hover {
+      background-color: #00594c;
+      transform: translateY(-2px);
+    }
+
     .btn-outline {
-      padding: 0.7rem;
-      padding-left: 3.9rem;
-      padding-right: 3.9rem;
       background: transparent;
-      border: 2px solid #00796b;
-      text-decoration: none;
       color: #00796b;
+      border: 2px solid #00796b;
+    }
+
+    .btn-outline:hover {
+      background: #e0f2f1;
+      transform: translateY(-2px);
     }
 
     .risk {
-      border-radius: 5px;
-      height: 3rem;
-      width: 5rem;
       background-color: #00796b;
       color: white;
-      padding: 0.7rem;
-      text-decoration: none;
+      border: none;
+      box-shadow: 0 4px 10px rgba(0, 121, 107, 0.2);
     }
 
+    .risk:hover {
+      background-color: #004d40;
+      transform: scale(1.05);
+    }
 
+    #reduce-risks h2 {
+      font-size: 2rem;
+      color: #00695c;
+    }
+
+    p {
+      line-height: 1.6;
+    }
   </style>
 </head>
 <body>
   <header>
-    <div style="display: flex; align-items: center; gap: 10px;">
-      <span style="color: #00796b; font-weight: bold; font-size: 1.5rem;">❤️ VitalGuard</span>
-    </div>
-    <nav>
-      <a href="#reduce-risks">Reduce Risks</a>
-      <a href="#chat">Chat with AI</a>
-    </nav>
+    <h1>❤️ VitalGuard - Your AI Health Companion for a Safer Tomorrow</h1>
   </header>
 
   <section class="hero">
@@ -118,22 +147,13 @@
       </div>
     </div>
 
-    <div style="margin-top: 2rem;">
+    <div style="margin-top: 2rem; text-align: center;">
       <a class="risk" href="riskButton.html">View Health Risks Analysis</a>
-      <a href="https://www.chatbase.co/chatbot-iframe/ejzroKWykxhiAWKl17BPa" class="btn btn-outline">Chat with AI</a>
+      <a href="https://www.chatbase.co/chatbot-iframe/ejzroKWykxhiAWKl17BPa" class="btn-outline">Chat with AI</a>
     </div>
   </section>
 
-  <section id="reduce-risks" class="hero">
-    <h2>Top 5 Health Risks</h2>
-    <p>This section will highlight the most common health issues, their causes, and prevention strategies following the 80/20 principle.</p>
-    <!-- Risk cards would go here -->
+  
   </section>
-
-  <script>
-    function scrollToSection(id) {
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-    }
-  </script>
 </body>
 </html>

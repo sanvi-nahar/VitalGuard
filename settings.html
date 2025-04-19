@@ -3,119 +3,210 @@
 <head>
   <meta charset="UTF-8">
   <title>VitalGuard - Settings</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f8f9;
+    :root {
+      --primary: #007c91;
+      --primary-dark: #005f6a;
+      --background: #f4f8f9;
+      --card-bg: #fff;
+      --text-primary: #333;
+      --text-secondary: #555;
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-    header {
-      background-color: #007c91;
-      color: white;
-      padding: 1rem 2rem;
-      font-size: 1.5rem;
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--background);
+      color: var(--text-primary);
+      line-height: 1.6;
     }
+
+    header {
+      background-color: var(--primary);
+      color: #fff;
+      padding: 1rem 2rem;
+      font-size: 1.7rem;
+      font-weight: 600;
+      text-align: center;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
     main {
       padding: 2rem;
-      max-width: 1000px;
+      max-width: 1100px;
       margin: auto;
     }
+
     h2 {
-      color: #007c91;
-      margin-bottom: 1rem;
+      color: var(--primary);
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      text-align: center;
     }
+
+    .setting-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
     .setting-section {
-      background: white;
-      border-radius: 12px;
+      background: var(--card-bg);
+      border-radius: 16px;
       padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
+
+    .setting-section:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+
     .setting-section h3 {
-      margin-top: 0;
-      color: #333;
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
+
     .setting-section p {
-      color: #555;
-      margin: 0.3rem 0 1rem;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
     }
-    .setting-section button {
-      background-color: #007c91;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    .setting-section button:hover {
-      background-color: #005f6a;
-    }
+
     .btn-settings {
       text-decoration: none;
-      color: white;
-      background-color: #007c91;
-      padding: 0.5rem;
-      border-radius: 0.6rem;
+      color: #fff;
+      background-color: var(--primary);
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      text-align: center;
+      width: fit-content;
+      transition: var(--transition);
     }
 
+    .btn-settings:hover {
+      background-color: var(--primary-dark);
+    }
 
+    /* Optional: Dark mode toggle */
+    .toggle-mode {
+      position: absolute;
+      top: 1.2rem;
+      right: 2rem;
+      background: #fff;
+      color: var(--primary);
+      padding: 0.3rem 0.7rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      border: 1px solid #ddd;
+      transition: var(--transition);
+    }
+
+    .toggle-mode:hover {
+      background: #e6f2f5;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        font-size: 1.4rem;
+        padding: 1rem;
+      }
+    }
   </style>
+
+  <script>
+    // Bonus: Dark mode toggle functionality
+    function toggleDarkMode() {
+      const body = document.body;
+      body.classList.toggle("dark");
+
+      if (body.classList.contains("dark")) {
+        document.documentElement.style.setProperty('--background', '#121212');
+        document.documentElement.style.setProperty('--card-bg', '#1e1e1e');
+        document.documentElement.style.setProperty('--text-primary', '#f0f0f0');
+        document.documentElement.style.setProperty('--text-secondary', '#ccc');
+      } else {
+        document.documentElement.style.setProperty('--background', '#f4f8f9');
+        document.documentElement.style.setProperty('--card-bg', '#fff');
+        document.documentElement.style.setProperty('--text-primary', '#333');
+        document.documentElement.style.setProperty('--text-secondary', '#555');
+      }
+    }
+  </script>
 </head>
+
 <body>
 
 <header>
   VitalGuard – Settings
+  <span class="toggle-mode" onclick="toggleDarkMode()">🌓 Toggle Mode</span>
 </header>
 
 <main>
   <h2>Settings</h2>
 
-  <div class="setting-section">
-    <h3>👤 My Profile</h3>
-    <p>Update your name, contact details, and medical profile.</p>
-    <a class="btn-settings" href="myProfile.html">Edit Profile</a>
+  <div class="setting-grid">
+
+    <div class="setting-section">
+      <h3>👤 My Profile</h3>
+      <p>Update your name, contact details, and medical profile.</p>
+      <a class="btn-settings" href="myProfile.html">Edit Profile</a>
+    </div>
+
+    <div class="setting-section">
+      <h3>🩺 Health Monitoring</h3>
+      <p>Select the vitals and alerts you’d like to monitor continuously.</p>
+      <a class="btn-settings" href="healthMonitoring.html">Configure Preferences</a>
+    </div>
+
+    <div class="setting-section">
+      <h3>🚨 Emergency Response</h3>
+      <p>Manage emergency contacts and auto-alert triggers in critical situations.</p>
+      <a class="btn-settings" href="emergencyResponse.html">Set Emergency Options</a>
+    </div>
+
+    <div class="setting-section">
+      <h3>🎨 Personalization</h3>
+      <p>Customize your dashboard, reminders, and theme settings.</p>
+      <a class="btn-settings" href="customizeExperience.html">Customize Experience</a>
+    </div>
+
+    <div class="setting-section">
+      <h3>🔒 Privacy & Data</h3>
+      <p>Control what health data is stored, shared, or deleted.</p>
+      <a class="btn-settings" href="privacyAndDataManagement.html">Privacy Settings</a>
+    </div>
+
+    <div class="setting-section">
+      <h3>🦽 Accessibility</h3>
+      <p>Enable features like voice assistance, high contrast, or larger fonts.</p>
+      <a class="btn-settings" href="adjustAccessibility.html">Adjust Accessibility</a>
+    </div>
+
+    <div class="setting-section">
+      <h3>⚙ App Settings</h3>
+      <p>Manage notifications, language, and general application configurations.</p>
+      <a class="btn-settings" href="appSettings.html">App Settings</a>
+    </div>
+
   </div>
-
-  <div class="setting-section">
-    <h3>🩺 Health Monitoring Preferences</h3>
-    <p>Select the health vitals and alerts you'd like to monitor continuously.</p>
-    <a class="btn-settings" href="healthMonitoring.html">Configure Preferences</a>
-  </div>
-
-  <div class="setting-section">
-    <h3>🚨 Emergency Response Settings</h3>
-    <p>Manage emergency contacts and configure auto-alerts in critical scenarios.</p>
-    <a class="btn-settings" href="emergencyResponse.html">Set Emergency Options</a>
-  </div>
-
-  
-  <div class="setting-section">
-    <h3>🎨 Personalization Options</h3>
-    <p>Customize your dashboard, reminders, and theme preferences.</p>
-    <a class="btn-settings" href="customizeExperience.html ">Customize Experience</a>
-  </div>
-
-  <div class="setting-section">
-    <h3>🔒 Privacy and Data Management</h3>
-    <p>Control what data is stored, shared, or deleted.</p>
-    <a class="btn-settings" href="privacyAndDataManagement.html">Privacy And Data Management</a>
-  </div>
-
-  <div class="setting-section">
-    <h3>🦽 Accessibility Features</h3>
-    <p>Enable features for better visibility, voice assistance, or larger fonts.</p>
-    <a class="btn-settings" href="adjustAccessibility.html">AdjustAccessibility</a>
-  </div>
-
-  <div class="setting-section">
-    <h3>⚙ Application Settings</h3>
-    <p>Set notification preferences, language, and other app configurations.</p>
-    <a class="btn-settings" href="appSettings.html">App Settings</a>
-  </div>
-
-
-
 </main>
 
 </body>
