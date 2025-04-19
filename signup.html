@@ -78,19 +78,23 @@
   </style>
 
   <script>
-     document.querySelector('form').addEventListener('submit', function (e) {
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelector('form').addEventListener('submit', function (e) {
       e.preventDefault(); // Prevent form from submitting the default way
 
       const fullName = document.querySelector('input[type="text"]').value;
       const email = document.querySelector('input[type="email"]').value;
 
-      // Store email and fullName in localStorage (you can store more data if needed)
+      // Save values in localStorage
       localStorage.setItem("userEmail", email);
       localStorage.setItem("userFullName", fullName);
 
-      // Redirect to personalize.html
+      // Redirect to personalize page
       window.location.href = "personalize.html";
     });
+  });
+
+
   </script>
 </head>
 <body>
