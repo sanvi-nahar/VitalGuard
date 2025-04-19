@@ -14,7 +14,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      height: 140vh;
     }
 
     .form-container {
@@ -87,7 +87,6 @@
   <div class="form-container">
     <h2>Personalize Your VitalGuard</h2>
     <form method="POST" action="{% url 'personalize' %}">
-      {% csrf_token %}
       <label for="age">Age</label>
       <input type="number" id="age" name="age" required />
 
@@ -120,8 +119,17 @@
         <option value="no">No</option>
       </select>
 
-      <button type="submit">Save & Continue</button>
+      <button type="submit" id="saveContinueBtn">Save & Continue</button>
     </form>
   </div>
+  <script>
+  document.getElementById('saveContinueBtn').addEventListener('click', function () {
+    // Save data logic can go here if needed
+    
+    // Redirect to dashboard
+    window.location.href = 'dashboard.html';  // Change this to your actual dashboard path
+  });
+
+  </script>
 </body>
 </html>

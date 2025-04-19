@@ -8,6 +8,15 @@
 
   <!-- Inline CSS -->
   <style>
+     :root {
+            --primary: #007C91;
+      --secondary: #38B6FF;
+      --accent: #A3E635;
+      --alert: #FF5C5C;
+      --bg: #FAFAFA;
+      --text: #2C2C2C;
+      --card-bg: #ffffff;
+     }
     body {
       font-family: 'Segoe UI', sans-serif;
       background-color: #f4f6f9;
@@ -30,7 +39,7 @@
 
     .auth-container h2 {
       margin-bottom: 20px;
-      color: #1b3c63;
+      color: var(--primary);
     }
 
     form input {
@@ -44,7 +53,7 @@
     form button {
       width: 100%;
       padding: 12px;
-      background-color: #1b3c63;
+      background-color: var(--primary);
       color: #fff;
       border: none;
       border-radius: 8px;
@@ -53,7 +62,7 @@
     }
 
     form button:hover {
-      background-color: #154569;
+      background-color: var(--primary);
     }
 
     form p {
@@ -62,7 +71,7 @@
     }
 
     form a {
-      color: #1b3c63;
+      color: var(--primary);
       text-decoration: none;
     }
   </style>
@@ -78,7 +87,8 @@
         <input type="email" placeholder="Email" class="input-field" required />
         <input type="password" placeholder="Password" class="input-field" required />
         <button type="submit" class="auth-btn">Login</button>
-        <p class="signup-link">Don't have an account? <a href="{% url 'signup' %}" class="signup-text">Signup</a></p>
+        <p class="signup-link">Don't have an account? <a href="signup.html" class="signup-text">Signup</a></p>
+        <p class="signup-link">Personalize For You<a class="signup-text" href="personalize.html"> Click here.</a></p>
       </form>
     </div>
   </div>

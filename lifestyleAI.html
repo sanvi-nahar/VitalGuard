@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Lifestyle AI – Mood Tracker</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     * {
       margin: 0;
@@ -13,90 +14,74 @@
     }
 
     body {
-  background: linear-gradient(135deg, #f5faff, #e0f7f4, #f8fdf2);
-  background-size: 300% 300%;
-  animation: subtleBgMove 25s ease-in-out infinite;
-  font-family: 'Poppins', sans-serif;
-  color: #1C1C1C;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 60px 30px;
-  min-height: 100vh;
-  margin: 0;
-  line-height: 1.6;
-  transition: all 0.3s ease-in-out;
-}
+      background: linear-gradient(135deg, #f5faff, #e0f7f4, #f8fdf2);
+      background-size: 300% 300%;
+      animation: subtleBgMove 25s ease-in-out infinite;
+      font-family: 'Poppins', sans-serif;
+      color: #1C1C1C;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
 
-@keyframes subtleBgMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-    .modern-heading {
-      font-size: 2.4rem;
+    @keyframes subtleBgMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      font-size: 2rem;
       font-weight: 600;
       text-align: center;
       margin-bottom: 30px;
       background: linear-gradient(to right, #4CAF50, #81C784);
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: fadeInSlideUp 1s ease-out 0.3s forwards;
-      opacity: 0;
-      transform: translateY(20px);
     }
 
-    @keyframes fadeInSlideUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: auto;
     }
 
-    .card, .healthforecast-card, .longterm-card, .planner-card {
-      background-color: white;
-      border-radius: 20px;
-      padding: 2rem;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-      width: 100%;
-      max-width: 500px;
-      margin-bottom: 30px;
-      text-align: center;
-      transition: transform 0.3s ease-in-out;
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease;
+      min-height: 240px;
     }
 
-    .card:hover, .healthforecast-card:hover, .longterm-card:hover, .planner-card:hover {
-      transform: translateY(-10px);
+    .card:hover {
+      transform: translateY(-6px);
     }
 
-    .greeting, .healthforecast-header, .longterm-header {
-      font-size: 1.5rem;
-      font-weight: 600;
+    .card h2 {
+      font-size: 1.2rem;
       color: #007C91;
-      margin-bottom: 0.5rem;
-    }
-
-    .question, .healthforecast-info, .longterm-info {
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 12px;
     }
 
     .emojis, .healthforecast-emoji-container {
       display: flex;
       justify-content: space-between;
       gap: 10px;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
+      margin-bottom: 10px;
     }
 
     .emoji, .healthforecast-emoji {
       cursor: pointer;
-      padding: 10px;
+      padding: 8px;
       border-radius: 50%;
-      transition: transform 0.2s ease, background-color 0.3s ease;
+      transition: 0.3s ease;
     }
 
     .emoji:hover, .healthforecast-emoji:hover {
@@ -108,206 +93,167 @@
       background-color: #A3E635;
     }
 
-    .log, .healthforecast-log, .longterm-log {
-      margin-top: 1rem;
-      font-size: 0.9rem;
-      color: #007C91;
+    .goal {
+      margin-bottom: 8px;
     }
 
-    .longterm-goals {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .longterm-goal {
-      background-color: #F0F4F8;
-      padding: 15px;
-      border-radius: 1rem;
-    }
-
-    .longterm-goal-name {
-      font-weight: bold;
-      color: #007C91;
-    }
-
-    .longterm-goal-status {
-      color: #A3E635;
-    }
-
-    .planner-card {
-      background: linear-gradient(135deg, #f0f4ff, #d9e4ff);
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    }
-
-    .planner-header {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #3a3a3a;
-      margin-bottom: 15px;
-      text-align: center;
-    }
-
-    .chat-window {
-      background-color: #ffffff;
-      border-radius: 15px;
-      padding: 15px;
-      height: 300px;
-      overflow-y: auto;
-      box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
-    }
-
-    .chat-message {
-      margin-bottom: 10px;
-      line-height: 1.4;
-    }
-
-    .chat-message.bot {
-      text-align: left;
+    .goal-name {
+      font-weight: 600;
       color: #555;
     }
 
-    .chat-message.user {
-      text-align: right;
-      color: #007C91;
+    .goal-value {
+      color: #A3E635;
     }
 
-    .chat-input-area {
-      display: flex;
-      margin-top: 15px;
+    canvas {
+      width: 100%;
+      max-height: 180px;
     }
 
-    #chat-input {
-      flex: 1;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      font-size: 1rem;
-    }
-
-    #send-btn {
-      padding: 10px 15px;
-      margin-left: 10px;
-      background-color: #007C91;
-      color: #fff;
+    button, .lifestyle-btn {
+      background-color: #4ecca3;
+      color: white;
+      padding: 10px 20px;
       border: none;
       border-radius: 10px;
+      font-weight: 600;
       cursor: pointer;
+      text-align: center;
+      margin-top: 10px;
+      text-decoration: none;
       transition: background-color 0.3s ease;
     }
 
-    #send-btn:hover {
-      background-color: #005f6b;
+    button:hover, .lifestyle-btn:hover {
+      background-color: #3cb28d;
     }
 
+    /* Modal styles */
+    #chatModal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+    }
+
+    .chatbox-wrapper {
+      position: relative;
+      width: 90%;
+      max-width: 700px;
+      height: 80%;
+      margin: 5% auto;
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .chatbox-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: #ff4d4d;
+      border: none;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
   </style>
 </head>
 <body>
-  <header class="modern-heading">
-    <h1 class="modern-heading">Welcome to Your Daily Space, Diya!</h1>
-  <p>Curated with AI.</p>
-  </header>
-  
 
-  <div class="card">
-    <div class="greeting" id="greeting">Hello!</div>
-    <div class="question">How are you feeling right now?</div>
-    <div class="emojis" id="emojiContainer">
-      <div class="emoji" data-mood="Happy 😊">😊</div>
-      <div class="emoji" data-mood="Calm 😌">😌</div>
-      <div class="emoji" data-mood="Energetic ⚡">⚡</div>
-      <div class="emoji" data-mood="Sad 😢">😢</div>
-      <div class="emoji" data-mood="Anxious 😰">😰</div>
-      <div class="emoji" data-mood="Angry 😡">😡</div>
-    </div>
-    <div class="log" id="logMsg"></div>
-  </div>
+  <h1>Welcome to Your Daily Space, Diya!</h1>
 
-  <div class="healthforecast-card">
-    <div class="healthforecast-header">Health Forecast for Today</div>
-    <div class="healthforecast-info" id="healthforecast-info">
-      Stay hydrated and get enough rest. Here's your health forecast:
-    </div>
-    <div class="healthforecast-emoji-container" id="healthforecast-emoji-container">
-      <div class="healthforecast-emoji" data-forecast="Hydration 💧">💧</div>
-      <div class="healthforecast-emoji" data-forecast="Sleep 😴">😴</div>
-      <div class="healthforecast-emoji" data-forecast="Exercise 🏋️">🏋️</div>
-      <div class="healthforecast-emoji" data-forecast="Diet 🥗">🥗</div>
-    </div>
-    <div class="healthforecast-log" id="healthforecast-log-msg"></div>
-  </div>
+  <div class="grid-container">
 
-  <div class="longterm-card">
-    <div class="longterm-header">Long-term Health Goals</div>
-    <div class="longterm-info">Track your long-term health progress and stay motivated!</div>
-    <div class="longterm-goals">
-      <div class="longterm-goal">
-        <div class="longterm-goal-name">Healthy Weight</div>
-        <div class="longterm-goal-status">Goal: 65kg</div>
+    <!-- Mood Tracker -->
+    <div class="card">
+      <h2>How are you feeling?</h2>
+      <div class="emojis" id="emojiContainer">
+        <div class="emoji" data-mood="😊">😊</div>
+        <div class="emoji" data-mood="😌">😌</div>
+        <div class="emoji" data-mood="⚡">⚡</div>
+        <div class="emoji" data-mood="😢">😢</div>
+        <div class="emoji" data-mood="😰">😰</div>
+        <div class="emoji" data-mood="😡">😡</div>
       </div>
-      <div class="longterm-goal">
-        <div class="longterm-goal-name">Daily Steps</div>
-        <div class="longterm-goal-status">Goal: 10,000 steps</div>
+      <div id="logMsg"></div>
+    </div>
+
+    <!-- Plan Lifestyle with VitalBot -->
+    <div class="card" style="text-align: center;">
+      <h2>Plan Your Lifestyle with VitalBot 🧠✨</h2>
+      <p>Get smarter with how you live. Start chatting now!</p>
+      <a class="lifestyle-btn" onclick="openChat()">Open VitalBot</a>
+    </div>
+
+    <!-- Long-Term Goals -->
+    <div class="card">
+      <h2>Long-Term Goals</h2>
+      <div class="goal">
+        <div class="goal-name">Healthy Weight</div>
+        <div class="goal-value">Goal: 65kg</div>
       </div>
-      <div class="longterm-goal">
-        <div class="longterm-goal-name">Healthy Heart Rate</div>
-        <div class="longterm-goal-status">Goal: 70 bpm</div>
+      <div class="goal">
+        <div class="goal-name">Daily Steps</div>
+        <div class="goal-value">Goal: 10,000 steps</div>
+      </div>
+      <div class="goal">
+        <div class="goal-name">Sleep</div>
+        <div class="goal-value">Goal: 8 hrs/night</div>
       </div>
     </div>
-    <div class="longterm-log" id="longterm-log-msg"></div>
   </div>
 
-  <div class="planner-card">
-    <div class="planner-header">Plan Your Day</div>
-    <div class="chat-window" id="chatWindow"></div>
-    <div class="chat-input-area">
-      <input type="text" id="chat-input" placeholder="Type your message here..." />
-      <button id="send-btn">Send</button>
+  <!-- Chat Modal -->
+  <div id="chatModal">
+    <div class="chatbox-wrapper">
+      <button class="close-btn" onclick="closeChat()">Close</button>
+      <iframe src="https://www.chatbase.co/chatbot-iframe/iCExrdlI_jqIwXSOUYGEi"></iframe>
     </div>
   </div>
 
   <script>
-    // Code to handle user input, emoji selection, and chat interactions
+    // Mood Logging
     const emojiContainer = document.getElementById('emojiContainer');
     const logMsg = document.getElementById('logMsg');
 
-    emojiContainer.addEventListener('click', function(event) {
-      if (event.target.classList.contains('emoji')) {
-        const selectedMood = event.target.getAttribute('data-mood');
-        logMsg.textContent = `You are feeling ${selectedMood}. Keep it up!`;
-        event.target.classList.toggle('selected');
+    emojiContainer.addEventListener('click', (e) => {
+      if (e.target.classList.contains('emoji')) {
+        document.querySelectorAll('.emoji').forEach(el => el.classList.remove('selected'));
+        e.target.classList.add('selected');
+        logMsg.textContent = "You’re feeling: " + e.target.getAttribute('data-mood');
       }
     });
 
-    const healthforecastEmojiContainer = document.getElementById('healthforecast-emoji-container');
-    const healthforecastLogMsg = document.getElementById('healthforecast-log-msg');
+    // Chat Modal Controls
+    function openChat() {
+      document.getElementById('chatModal').style.display = 'block';
+    }
 
-    healthforecastEmojiContainer.addEventListener('click', function(event) {
-      if (event.target.classList.contains('healthforecast-emoji')) {
-        const selectedForecast = event.target.getAttribute('data-forecast');
-        healthforecastLogMsg.textContent = `Your health forecast: ${selectedForecast}`;
-        event.target.classList.toggle('selected');
-      }
-    });
-
-    const chatInput = document.getElementById('chat-input');
-    const sendBtn = document.getElementById('send-btn');
-    const chatWindow = document.getElementById('chatWindow');
-
-    sendBtn.addEventListener('click', () => {
-      const userMessage = chatInput.value;
-      if (userMessage) {
-        chatWindow.innerHTML += `<div class="chat-message user">${userMessage}</div>`;
-        chatInput.value = '';
-        chatWindow.scrollTop = chatWindow.scrollHeight;
-        setTimeout(() => {
-          chatWindow.innerHTML += `<div class="chat-message bot">I'm here to help!</div>`;
-          chatWindow.scrollTop = chatWindow.scrollHeight;
-        }, 1000);
-      }
-    });
+    function closeChat() {
+      document.getElementById('chatModal').style.display = 'none';
+    }
   </script>
 
 </body>
