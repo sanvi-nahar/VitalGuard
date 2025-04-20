@@ -28,6 +28,7 @@
     }
 
     .auth-container {
+      justify-content: center;
       background-color: #fff;
       padding: 30px;
       border-radius: 12px;
@@ -43,39 +44,83 @@
       color: var(--primary);
     }
 
-    form input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
+    <style>
+  :root {
+    --primary: #007C91;
+    --secondary: #38B6FF;
+    --accent: #A3E635;
+    --alert: #FF5C5C;
+    --bg: #FAFAFA;
+    --text: #2C2C2C;
+    --card-bg: #ffffff;
+  }
 
-    form button {
-      width: 100%;
-      padding: 12px;
-      background-color: var(--primary);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-    }
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f6f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
 
-    form button:hover {
-      background-color: var(--primary);
-    }
+  .auth-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+  }
 
-    form p {
-      margin-top: 15px;
-      font-size: 14px;
-    }
+  .auth-container h2 {
+    margin-bottom: 20px;
+    color: var(--primary);
+  }
 
-    form a {
-      color: #1b3c63;
-      text-decoration: none;
-    }
-  </style>
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  form input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  form button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  form button:hover {
+    background-color: var(--secondary);
+  }
+
+  form p {
+    margin-top: 15px;
+    font-size: 14px;
+  }
+
+  form a {
+    color: #1b3c63;
+    text-decoration: none;
+  }
+</style>
 
   <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -90,7 +135,7 @@
       localStorage.setItem("userFullName", fullName);
 
       // Redirect to personalize page
-      window.location.href = "personalize.html";
+      window.location.href = "login.html";
     });
   });
 

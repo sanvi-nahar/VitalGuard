@@ -1,25 +1,27 @@
 
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login - VitalGuard</title>
 
-  <!-- Inline CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
   <style>
-     :root {
-            --primary: #007C91;
+    :root {
+      --primary: #007C91;
       --secondary: #38B6FF;
       --accent: #A3E635;
       --alert: #FF5C5C;
       --bg: #FAFAFA;
       --text: #2C2C2C;
       --card-bg: #ffffff;
-     }
+    }
+
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f6f9;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -28,7 +30,7 @@
     }
 
     .auth-container {
-      background-color: #fff;
+      background-color: var(--card-bg);
       padding: 30px;
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -37,20 +39,39 @@
       text-align: center;
     }
 
-    .auth-container h2 {
+    .auth-header {
       margin-bottom: 20px;
       color: var(--primary);
+      font-weight: 600;
     }
 
-    form input {
+    .auth-form input[type="email"],
+    .auth-form input[type="password"] {
       width: 100%;
       padding: 12px;
       margin: 10px 0;
       border: 1px solid #ccc;
       border-radius: 8px;
+      font-size: 14px;
     }
 
-    form button {
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+      margin: 10px 0;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .checkbox-container input[type="checkbox"] {
+      margin-right: 8px;
+      transform: scale(1.1);
+      cursor: pointer;
+    }
+
+    .auth-btn {
       width: 100%;
       padding: 12px;
       background-color: var(--primary);
@@ -59,38 +80,70 @@
       border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
+      font-size: 15px;
     }
 
-    form button:hover {
-      background-color: var(--primary);
+    .auth-btn:hover {
+      background-color: #005e6b;
     }
 
-    form p {
+    .signup-link {
       margin-top: 15px;
       font-size: 14px;
     }
 
-    form a {
+    .signup-text {
       color: var(--primary);
       text-decoration: none;
+      margin-left: 4px;
+    }
+
+    .signup-text:hover {
+      text-decoration: underline;
     }
   </style>
-
-  <script src="{% static 'vitalguard/static/js/scripts.js' %}" defer></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
   <div class="auth-container">
-    <div class="auth-card">
-      <h2 class="auth-header">Login to VitalGuard</h2>
-      <form class="auth-form">
-        <input type="email" placeholder="Email" class="input-field" required />
-        <input type="password" placeholder="Password" class="input-field" required />
-        <button type="submit" class="auth-btn">Login</button>
-        <p class="signup-link">Don't have an account? <a href="signup.html" class="signup-text">Signup</a></p>
-        <p class="signup-link">Personalize For You<a class="signup-text" href="personalize.html"> Click here.</a></p>
-      </form>
-    </div>
+    <h2 class="auth-header">Login to VitalGuard</h2>
+    <form class="auth-form" id="loginForm">
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+
+      <div class="checkbox-container">
+        <input type="checkbox" id="remember" />
+        <label for="remember">Remember Me</label>
+      </div>
+
+      <button type="submit" class="auth-btn">Login</button>
+
+      <p class="signup-link">
+        Don’t have an account? 
+        <a href="signup.html" class="signup-text">Signup</a>
+      </p>
+      
+      <p class="signup-link">
+        Personalize for you 
+        <a class="signup-text" href="personalize.html">Click here</a>
+      </p>
+    </form>
   </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      // ✅ You can add actual login validation here
+      // For now, we just save to localStorage and redirect
+      localStorage.setItem("userEmail", email);
+
+      // ✅ Redirect to dashboard
+      window.location.href = "dashboard.html";
+    });
+  </script>
 </body>
 </html>
